@@ -7,6 +7,16 @@ const AuthDispatchContext = React.createContext();
 let user = null;
 const token = localStorage.getItem("tokenInternMe");
 
+let email = localStorage.getItem("internMe_email");
+if(email == undefined){
+    email = null;
+}
+
+let reset_token = localStorage.getItem("internMe_reset_token");
+if(reset_token == undefined){
+    reset_token = null;
+}
+
 if(token){
     const decodedToken = jwtDecode(token);
     const expiresAt = new Date(decodedToken.exp * 1000);
@@ -34,13 +44,37 @@ const authReducer = (state, action) => {
                 ...state,
                 user: null,
             }
+        case 'Save_Email' :
+            localStorage.setItem('internMe_email', action.payload);
+            return {
+                ...state,
+                email: action.payload,
+            }
+        case 'Remove_Email' :
+            localStorage.removeItem('internMe_email');
+            return {
+                ...state,
+                email: null,
+            }
+        case 'Save_Token' :
+            localStorage.setItem('internMe_reset_token', action.payload);
+            return {
+                ...state,
+                reset_token: action.payload,
+            }
+        case 'Remove_Token' :
+            localStorage.removeItem('internMe_reset_token');
+            return {
+                ...state,
+                reset_token: null,
+            }
         default:
             throw new Error(`Unkonwn action type: ${action.type}`);
     }
 }
 
 export const AuthProvider = ({ children }) => {
-    const [state, dispatch] = React.useReducer(authReducer, { user });
+    const [state, dispatch] = React.useReducer(authReducer, { user, email, reset_token });
 
     return (
         <AuthDispatchContext.Provider value={dispatch}>

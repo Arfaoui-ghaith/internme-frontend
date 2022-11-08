@@ -18,7 +18,7 @@ function Intern(){
                     <div
                         className="page-header min-height-300 border-radius-xl mt-4"
                         style={{
-                            backgroundImage: 'url("../assets/img/curved-images/curved0.jpg")',
+                            backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`,
                             backgroundPositionY: "50%"
                         }}
                     >

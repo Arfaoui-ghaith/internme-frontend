@@ -24,7 +24,7 @@ function AuthNav() {
             <div className="container-fluid py-1 px-3">
                 <nav aria-label="">
                     <Link to={"/"}>
-                        <img src="https://res.cloudinary.com/dztythssn/image/upload/c_scale,w_150/v1667700581/internme_zcxnzj.png"
+                        <img src="https://res.cloudinary.com/dztythssn/image/upload/c_scale,w_150/v1667860285/internme_argnkp.png"
                              className="img-fluid"
                              alt="..."/>
                     </Link>

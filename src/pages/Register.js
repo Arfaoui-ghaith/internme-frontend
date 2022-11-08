@@ -44,7 +44,7 @@ function Register() {
                     <div
                         className="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
                         style={{
-                            backgroundImage: 'url("../assets/img/curved-images/curved14.jpg")'
+                            backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`
                         }}
                     >
                         <span className="mask bg-gradient-dark opacity-6" />

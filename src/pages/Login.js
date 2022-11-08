@@ -44,7 +44,7 @@ function Login() {
         <React.Fragment>
             <main className="main-content  mt-0">
                 <section>
-                    <div className="page-header min-vh-75">
+                    <div className="page-header min-vh-100">
                         <div className="container">
                             <div className="row">
                                 <div className="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
@@ -83,7 +83,7 @@ function Login() {
                                                     <p className="mb-1 text-sm mx-auto">
                                                         Forget password?
                                                         <Link
-                                                            to="/resetPassword"
+                                                            to="/forget"
                                                             className="text-info text-gradient font-weight-bold"
                                                         >
                                                             click
@@ -120,7 +120,7 @@ function Login() {
                                             className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                                             style={{
                                                 backgroundImage:
-                                                    'url("../assets/img/curved-images/curved6.jpg")'
+                                                    `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`
                                             }}
                                         />
                                     </div>
