@@ -17,18 +17,18 @@ function Home() {
                 let skills1 = [];
                 for(let item of res.data.interns.filter(item => item.skills.length > 0)){
                     for(let sk of item.skills){
-                        console.log(sk)
                         skills1.push({ value: `${sk.skill.title}`, label: `${sk.skill.title}` });
                     }
                 }
                 setSkills(uab(skills1))
-
                 return setInterns(res.data.interns.filter(item => item.skills.length > 0))
             })
             .catch(er => console.error(er));
 
 
     },[]);
+
+
 
     const countries = uab(interns.map(item => {
         return { value: item.company.country, label: `${item.company.countryFlag} | ${item.company.country}` }
@@ -38,9 +38,20 @@ function Home() {
         return { value: item.company.name, label: `${item.company.name}` }
     }));
 
+    let [data, setData] = useState({country: [], company: [], skill: [], remote: false})
 
 
-
+    const filter = (index,value) => {
+        if(value === ""){
+            let obj = data;
+            delete obj[index];
+            setData(obj);
+        }else {
+            let obj = {...data};
+            obj[index] = value;
+            setData(obj);
+        }
+    }
 
 
     const animatedComponents = makeAnimated();
@@ -56,21 +67,36 @@ function Home() {
                             <div className="card-header pb-0 p-3">
                                 <h6 className="mb-1">Filter</h6>
                                 <div className="d-flex justify-content-around">
+                                    <div className="form-check form-switch mt-2">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="flexSwitchCheckChecked"
+                                            defaultChecked=""
+                                            onClick={() => setData({...data,remote: !data.remote})}
+                                        />
+                                        <label className="form-check-label">
+                                            Remote
+                                        </label>
+                                    </div>
                                     <Select
                                         placeholder={"Countries"}
                                         components={animatedComponents}
-                                        className={"mb-2 w-20"}
+                                        className={"mb-3 w-20"}
                                         isMulti
+                                        onChange={(list) => filter("country",list.map(c => c.value))}
                                         options={countries} />
                                     <Select placeholder={"Companies"}
                                             components={animatedComponents}
-                                            className={"mb-2 w-20"}
+                                            className={"mb-3 w-20"}
                                             isMulti
+                                            onChange={(list) => filter("company",list.map(c => c.value))}
                                             options={companies} />
                                     <Select placeholder={"Skills"}
                                             components={animatedComponents}
-                                            className={"mb-2 w-20"}
+                                            className={"mb-3 w-20"}
                                             isMulti
+                                            onChange={(list) => filter("skill",list.map(c => c.value))}
                                             options={skills} />
 
                                 </div>
@@ -82,7 +108,7 @@ function Home() {
                             {
                                 interns.map(intern => {
                                     return (
-                                        <Card intern={intern} key={intern.id}/>
+                                        <Card intern={intern} key={intern.id} data={data}/>
                                     )
                                 })
                             }
