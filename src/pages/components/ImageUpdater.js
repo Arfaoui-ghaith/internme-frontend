@@ -18,47 +18,45 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 import axios from "axios";
 import toast, {Toaster} from "react-hot-toast";
 import { useAuthState } from './../../context/auth'
-import {useNavigate} from "react-router-dom";
+
 // Register the plugins
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode)
 
 // Our app
-function ImageUpdater({showImage,handleCloseImage}) {
-    const [data, setData] = useState(null);
-    const navigate = useNavigate();
+function ImageUpdater({showImage,handleCloseImage,setData,data}) {
+    const [file, setFile] = useState(null);
+
     const {user} = useAuthState();
-    const handleOnClick = useCallback(() => navigate("/profile", {replace: true}), [navigate]);
+
 
     const updateImage = () => {
         toast.promise(
             axios({
                     method: 'post',
                     url:'http://localhost:9000/api/users/me',
-                    data,
+                    data: file,
                     headers:{
                         'Authorization': `${user}`
                     }
                 })
-                .then(res => console.log(res.data)),
+                .then(res => setData({...data,image: res.data.image})),
             {
                 loading: 'Loading...',
                 success: 'Success',
                 error: (err) => err.response.data.message,
             }
         )
-        handleOnClick();
     }
 
     return (
         <>
             <Modal show={showImage} onHide={handleCloseImage}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Update Profile Image</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="App">
                         <FilePond
-                            origin={(e) => { console.log(e)}}
                             allowMultiple={false}
                             name="photo"
                             server={{
@@ -69,7 +67,7 @@ function ImageUpdater({showImage,handleCloseImage}) {
                                     const formData = new FormData();
                                     formData.append(fieldName, file, file.name);
 
-                                    setData(formData)
+                                    setFile(formData)
 
                                     const request = new XMLHttpRequest();
                                     request.open('POST', 'http://localhost:9000/api/users/fakeImage', );

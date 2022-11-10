@@ -31,14 +31,6 @@
   align-items: center
 }
 
-.progress {
-  height: 10px;
-  border-radius: 10px
-}
-
-.progress div {
-  background-color: green;
-}
 
 .text1 {
   font-size: 14px;

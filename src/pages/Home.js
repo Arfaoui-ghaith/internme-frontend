@@ -5,11 +5,23 @@ import axios from 'axios'
 import Select from 'react-select'
 import uab from 'unique-array-objects';
 import makeAnimated from 'react-select/animated';
+import { useAuthState } from './../context/auth'
 
 function Home() {
 
+    const {user} = useAuthState();
     const [interns,setInterns] = useState([]);
     let [skills,setSkills] = useState([]);
+    let [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:9000/api/users/me",{headers: {'Authorization': `${user}`}})
+            .then(res => setUserData(res.data.user))
+            .catch(err => console.error(err.message));
+    },[])
+
+
 
     useEffect(() => {
         axios.get("http://localhost:9000/api/interns/")
@@ -38,7 +50,7 @@ function Home() {
         return { value: item.company.name, label: `${item.company.name}` }
     }));
 
-    let [data, setData] = useState({country: [], company: [], skill: [], remote: false})
+    let [data, setData] = useState({country: [], company: [], skill: [], remote: false, match: false})
 
 
     const filter = (index,value) => {
@@ -79,6 +91,18 @@ function Home() {
                                             Remote
                                         </label>
                                     </div>
+                                    <div className="form-check form-switch mt-2">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="flexSwitchCheckChecked"
+                                            defaultChecked=""
+                                            onClick={() => setData({...data,match: !data.match})}
+                                        />
+                                        <label className="form-check-label">
+                                            Match my skills
+                                        </label>
+                                    </div>
                                     <Select
                                         placeholder={"Countries"}
                                         components={animatedComponents}
@@ -86,6 +110,7 @@ function Home() {
                                         isMulti
                                         onChange={(list) => filter("country",list.map(c => c.value))}
                                         options={countries} />
+
                                     <Select placeholder={"Companies"}
                                             components={animatedComponents}
                                             className={"mb-3 w-20"}
@@ -108,7 +133,7 @@ function Home() {
                             {
                                 interns.map(intern => {
                                     return (
-                                        <Card intern={intern} key={intern.id} data={data}/>
+                                        <Card intern={intern} key={intern.id} data={data} userData={userData}/>
                                     )
                                 })
                             }

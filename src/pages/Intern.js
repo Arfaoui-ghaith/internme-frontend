@@ -119,54 +119,7 @@ function Intern(){
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 mt-4">
-                            <div className="card mb-4">
-                                <div className="card-header pb-0 p-3">
-                                    <h6 className="mb-1">Projects</h6>
-                                    <p className="text-sm">Architects design houses</p>
-                                </div>
-                                <div className="card-body p-3">
-                                    <div className="row">
-                                        <div className="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                                            <div className="card card-blog card-plain">
-                                                <div className="position-relative">
-                                                    <a className="d-block shadow-xl border-radius-xl">
-                                                        <img
-                                                            src="../assets/img/home-decor-3.jpg"
-                                                            alt="img-blur-shadow"
-                                                            className="img-fluid shadow border-radius-xl"
-                                                        />
-                                                    </a>
-                                                </div>
-                                                <div className="card-body px-1 pb-0">
-                                                    <p className="text-gradient text-dark mb-2 text-sm">
-                                                        Project #3
-                                                    </p>
-
-                                                    <p className="mb-4 text-sm">
-                                                        Different people have different taste, and various types
-                                                        of music.
-                                                    </p>
-                                                    <div className="d-flex align-items-center justify-content-between">
-                                                        <button
-                                                            type="button"
-                                                            className="btn btn-outline-primary btn-sm mb-0"
-                                                        >
-                                                            View Project
-                                                        </button>
-                                                        <div className="avatar-group mt-2">
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

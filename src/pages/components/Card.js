@@ -5,12 +5,14 @@ import { useInternDispatch } from './../../context/intern'
 import { useAuthState } from './../../context/auth'
 import {useNavigate} from "react-router-dom";
 import {format} from "timeago.js";
+import ProgressBar from "./ProgressBar";
 
-function Card({intern, data}) {
+function Card({intern, data, userData}) {
     const dispatch = useInternDispatch();
     const { user } = useAuthState();
     const navigate = useNavigate();
     let [path, setPath] = useState("/intern");
+    const [prog, setProg] = useState(0);
 
     const handleOnClick = useCallback(() => navigate(path, {replace: true}), [navigate,path]);
 
@@ -37,6 +39,9 @@ function Card({intern, data}) {
         }
         if(data.remote){
             c = c && intern.remote === true
+        }
+        if(data.match){
+            c = c && prog > 0
         }
         return c
     }
@@ -76,16 +81,7 @@ function Card({intern, data}) {
                             <div className="mt-5">
                                 {
                                     user ?
-                                        <div className="progress">
-                                            <div
-                                                className="progress-bar"
-                                                role="progressbar"
-                                                style={{width: "50%"}}
-                                                aria-valuenow={50}
-                                                aria-valuemin={0}
-                                                aria-valuemax={100}
-                                            />
-                                        </div>
+                                        <ProgressBar userdata={userData} intern={intern} setProg={setProg}/>
 
                                         :
                                         <div>

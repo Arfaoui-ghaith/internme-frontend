@@ -1,20 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import AuthNav from "./User/AuthNav";
 import { useAuthState } from './../context/auth'
 import UserForm from "./components/UserForm";
 import ImageUpdater from "./components/ImageUpdater"
+import SkillsUpdater from "./components/SkillsUpdater"
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
 function Profile(){
     const [show, setShow] = useState(false);
     const [showImage, setShowImage] = useState(false);
+    const [showSkills, setShowSkills] = useState(false)
     let [data, setData] = useState({});
+    const navigate = useNavigate();
+    const handleOnClick = useCallback(() => navigate("/profile", {replace: true}), [navigate]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const handleCloseImage = () => setShowImage(false);
     const handleShowImage = () => setShowImage(true);
+
+    const handleCloseSkills = () => setShowSkills(false);
+    const handleShowSkills = () => setShowSkills(true);
 
     const {user} = useAuthState();
 
@@ -27,8 +35,9 @@ function Profile(){
 
     return(
         <>
-            <UserForm show={show} handleClose={handleClose} data={data}/>
-            <ImageUpdater showImage={showImage} handleCloseImage={handleCloseImage}/>
+            <UserForm show={show} handleClose={handleClose} data={data} setData={setData} />
+            <ImageUpdater showImage={showImage} handleCloseImage={handleCloseImage} data={data} setData={setData}/>
+            <SkillsUpdater showSkills={showSkills} handleCloseSkills={handleCloseSkills} data={data} setData={setData}/>
             <div className="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
                 {/* Navbar */}
                 <AuthNav />
@@ -80,10 +89,10 @@ function Profile(){
                                                     defaultChecked=""
                                                 />
                                                 <label
-                                                    className="form-check-label text-body ms-3 text-truncate w-80 mb-0"
+                                                    className="form-check-label text-body ms-3  w-80 mb-0"
                                                     htmlFor="flexSwitchCheckDefault"
                                                 >
-                                                    Email me when someone follows me
+                                                    Email me immediately when new internship match my skills
                                                 </label>
                                             </div>
                                         </li>
@@ -95,10 +104,10 @@ function Profile(){
                                                     id="flexSwitchCheckDefault1"
                                                 />
                                                 <label
-                                                    className="form-check-label text-body ms-3 text-truncate w-80 mb-0"
+                                                    className="form-check-label text-body ms-3  w-80 mb-0"
                                                     htmlFor="flexSwitchCheckDefault1"
                                                 >
-                                                    Email me when someone answers on my post
+                                                    Email me monthly with new suggestions
                                                 </label>
                                             </div>
                                         </li>
@@ -111,10 +120,10 @@ function Profile(){
                                                     defaultChecked=""
                                                 />
                                                 <label
-                                                    className="form-check-label text-body ms-3 text-truncate w-80 mb-0"
+                                                    className="form-check-label text-body ms-3  w-80 mb-0"
                                                     htmlFor="flexSwitchCheckDefault2"
                                                 >
-                                                    Email me when someone mentions me
+                                                    Email me when new updates come out in the application
                                                 </label>
                                             </div>
                                         </li>
@@ -130,7 +139,7 @@ function Profile(){
                                         <div className="col-md-8 d-flex align-items-center">
                                             <h6 className="mb-0">Profile Information</h6>
                                         </div>
-                                        <div className="col-md-4 text-end pointer-cursor">
+                                        <div className="col-md-4 text-end pointer-cursor" onClick={handleShowSkills}>
                                                 <i
                                                     className="fas fa-user-edit text-secondary text-sm "
                                                     data-bs-toggle="tooltip"
@@ -146,19 +155,14 @@ function Profile(){
                                 <div className="card-body p-3">
                                     <ul className="list-group">
                                         <li className="list-group-item border-0 ps-0 pt-0 text-sm">
-                                            <strong className="text-dark">Full Name:</strong> &nbsp; Alec M.
-                                            Thompson
+                                            <strong className="text-dark">First Name:</strong> &nbsp; {data.first_name}
                                         </li>
                                         <li className="list-group-item border-0 ps-0 text-sm">
-                                            <strong className="text-dark">Mobile:</strong> &nbsp; (44) 123 1234
-                                            123
+                                            <strong className="text-dark">Last Name:</strong> &nbsp; {data.last_name}
                                         </li>
                                         <li className="list-group-item border-0 ps-0 text-sm">
                                             <strong className="text-dark">Email:</strong> &nbsp;
-                                            alecthompson@mail.com
-                                        </li>
-                                        <li className="list-group-item border-0 ps-0 text-sm">
-                                            <strong className="text-dark">Location:</strong> &nbsp; USA
+                                            {data.email}
                                         </li>
                                     </ul>
                                 </div>
@@ -171,7 +175,7 @@ function Profile(){
                                         <div className="col-md-8 d-flex align-items-center">
                                             <h6 className="mb-0">My Skills</h6>
                                         </div>
-                                        <div className="col-md-4 text-end pointer-cursor">
+                                        <div className="col-md-4 text-end pointer-cursor" onClick={handleShowSkills}>
 
                                             <i
                                                 className="fas fa-list text-secondary text-sm "
@@ -181,6 +185,18 @@ function Profile(){
                                                 aria-label="Edit Profile"
                                             />
                                             <span className="sr-only">Edit Skills</span>
+                                        </div>
+                                        <div className="card-body p-3">
+                                            {
+                                                data.skills && data.skills.length > 0 ?
+                                                data.skills.map(item => {
+                                                    return (
+                                                        <span className="badge bg-primary px-2 m-1" key={item.skill.id}>{item.skill.title}</span>
+                                                    )
+                                                })
+                                                    :
+                                                    <div></div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
