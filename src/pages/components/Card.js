@@ -81,7 +81,7 @@ function Card({intern, data, userData}) {
                             <div className="mt-5">
                                 {
                                     user ?
-                                        <ProgressBar userdata={userData} intern={intern} setProg={setProg}/>
+                                        <ProgressBar key={intern.id} userdata={userData} intern={intern} setProg={setProg}/>
 
                                         :
                                         <div>

@@ -91,18 +91,22 @@ function Home() {
                                             Remote
                                         </label>
                                     </div>
-                                    <div className="form-check form-switch mt-2">
-                                        <input
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            id="flexSwitchCheckChecked"
-                                            defaultChecked=""
-                                            onClick={() => setData({...data,match: !data.match})}
-                                        />
-                                        <label className="form-check-label">
-                                            Match my skills
-                                        </label>
-                                    </div>
+                                    { user ?
+                                        <div className="form-check form-switch mt-2">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                id="flexSwitchCheckChecked"
+                                                defaultChecked=""
+                                                onClick={() => setData({...data, match: !data.match})}
+                                            />
+                                            <label className="form-check-label">
+                                                Match my skills
+                                            </label>
+                                        </div>
+                                        :
+                                        <div></div>
+                                    }
                                     <Select
                                         placeholder={"Countries"}
                                         components={animatedComponents}

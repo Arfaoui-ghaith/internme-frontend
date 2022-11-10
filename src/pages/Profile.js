@@ -139,7 +139,7 @@ function Profile(){
                                         <div className="col-md-8 d-flex align-items-center">
                                             <h6 className="mb-0">Profile Information</h6>
                                         </div>
-                                        <div className="col-md-4 text-end pointer-cursor" onClick={handleShowSkills}>
+                                        <div className="col-md-4 text-end pointer-cursor" >
                                                 <i
                                                     className="fas fa-user-edit text-secondary text-sm "
                                                     data-bs-toggle="tooltip"
