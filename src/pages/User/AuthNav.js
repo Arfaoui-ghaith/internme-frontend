@@ -2,8 +2,7 @@ import React, {useCallback} from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import { useAuthState } from './../../context/auth'
 import { useAuthDispatch } from './../../context/auth'
-import { Image } from '@chakra-ui/react'
-import {useInternDispatch} from "../../context/intern";
+
 function AuthNav() {
     const { user } = useAuthState();
     const dispatch = useAuthDispatch();

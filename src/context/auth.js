@@ -8,12 +8,12 @@ let user = null;
 const token = localStorage.getItem("tokenInternMe");
 
 let email = localStorage.getItem("internMe_email");
-if(email == undefined){
+if(email === undefined){
     email = null;
 }
 
 let reset_token = localStorage.getItem("internMe_reset_token");
-if(reset_token == undefined){
+if(reset_token === undefined){
     reset_token = null;
 }
 
@@ -24,7 +24,7 @@ if(token){
     if(new Date() > expiresAt){
         localStorage.removeItem('tokenInternMe');
     } else {
-        user = decodedToken;
+        user = token;
     }
 } else {
     console.error('token not found');

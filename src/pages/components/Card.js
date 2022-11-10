@@ -36,7 +36,7 @@ function Card({intern, data}) {
             c = c && data.skill.filter(x => intern.skills.map(sk => sk.skill.title).includes(x)).length > 0
         }
         if(data.remote){
-            c = c && intern.remote == true
+            c = c && intern.remote === true
         }
         return c
     }
