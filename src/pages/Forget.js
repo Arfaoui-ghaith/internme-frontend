@@ -31,7 +31,7 @@ function ForgetPassword() {
     const forgetPassword = () => {
         toast.promise(
             axios
-                .post('http://localhost:9000/api/users/reset', data)
+                .post('https://internme-backend.herokuapp.com/api/users/reset', data)
                 .then(res => {
                     dispatch({ type:'Save_Email', payload: data.email });
                 }),

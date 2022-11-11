@@ -34,7 +34,7 @@ function SkillsUpdater({showSkills,handleCloseSkills, data, setData}){
     useEffect(() => {
         axios({
             method: 'get',
-            url:'http://localhost:9000/api/skills/',
+            url:'https://internme-backend.herokuapp.com/api/skills/',
             headers:{
                 'Authorization': `${user}`
             }
@@ -45,7 +45,7 @@ function SkillsUpdater({showSkills,handleCloseSkills, data, setData}){
         toast.promise(
             axios({
                 method: 'put',
-                url:'http://localhost:9000/api/users/me',
+                url:'https://internme-backend.herokuapp.com/api/users/me',
                 data: {...data, skills: selectedSkills.map(item => item.value)},
                 headers:{
                     'Authorization': `${user}`

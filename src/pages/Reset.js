@@ -31,7 +31,7 @@ function Reset() {
     const resetPassword = () => {
         toast.promise(
             axios
-                .put('http://localhost:9000/api/users/reset', data)
+                .put('https://internme-backend.herokuapp.com/api/users/reset', data)
                 .then(res => {
                     dispatch({ type:'Remove_Token', payload: null });
                     dispatch({ type:'Remove_Email', payload: null });
