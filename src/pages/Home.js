@@ -19,7 +19,7 @@ function Home() {
             .get("http://localhost:9000/api/users/me",{headers: {'Authorization': `${user}`}})
             .then(res => setUserData(res.data.user))
             .catch(err => console.error(err.message));
-    },[])
+    },[user])
 
 
 

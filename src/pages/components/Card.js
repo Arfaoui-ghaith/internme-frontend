@@ -1,3 +1,4 @@
+//eslint-disable-next-line
 import React, {useCallback, useState} from 'react';
 import './Styles/card.css';
 import { Image } from '@chakra-ui/react'
