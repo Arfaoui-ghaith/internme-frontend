@@ -1,13 +1,39 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import AuthNav from "./User/AuthNav";
 import {useInternState} from "../context/intern";
 import { format } from 'timeago.js';
+import axios from "axios";
+import { useAuthState } from './../context/auth'
+import {useNavigate} from "react-router-dom";
 
+const image = Math.floor(Math.random() * 23);
 function Intern(){
-
+    const {user} = useAuthState();
     const { intern } = useInternState();
     const duration = format(new Date(intern.validThrough).getTime(),"my-locale",{relativeDate: new Date(intern.datePosted).toLocaleDateString()});
-    console.log(intern)
+    const navigate = useNavigate();
+    const extractPDF = () => {
+            axios({
+                method: 'post',
+                url:'http://localhost:9000/api/interns/extract',
+                data: {
+                    title: intern.title,
+                    company: {
+                        name: intern.company.name,
+                        address: intern.company.address+", "+intern.company.country
+                    }
+                },
+                headers:{
+                    'Authorization': `${user}`
+                }
+            })
+            .then(res => {
+                console.log(res)
+                window.open(res.data.pdf.download_url, "_blank")
+                //navigate(res.data.pdf.download_url, {replace: true})
+            })
+            .catch(err => console.error(err.message));
+    }
     return(
         <>
             <div className="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
@@ -18,7 +44,7 @@ function Intern(){
                     <div
                         className="page-header min-height-300 border-radius-xl mt-4"
                         style={{
-                            backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`,
+                            backgroundImage: `url("../assets/img/curved-images/curved${image}.jpg")`,
                             backgroundPositionY: "50%"
                         }}
                     >
@@ -99,6 +125,11 @@ function Intern(){
                                             >
                                                 Apply Now
                                             </a>
+                                            <span className="btn btn-link pe-3 ps-0 mb-0 ms-auto"
+                                                onClick={()=>extractPDF()}
+                                            >
+                                                Extract Application
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>

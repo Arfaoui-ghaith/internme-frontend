@@ -8,6 +8,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useAuthDispatch } from './../context/auth'
 
+const image = Math.floor(Math.random() * 23);
+
 function Login() {
     const dispatch = useAuthDispatch();
     const navigate = useNavigate();
@@ -28,7 +30,7 @@ function Login() {
     const loginUser = () => {
         toast.promise(
             axios
-                .post('https://internme-backend.herokuapp.com/api/users/login', data)
+                .post('http://localhost:9000/api/users/login', data)
                 .then(res => {
                     dispatch({ type:'LOGIN', payload: res.data.token });
                 }),
@@ -39,6 +41,8 @@ function Login() {
             }
         ).then(res => setTimeout (navigate('/'),5000));
     }
+
+
 
     return (
         <React.Fragment>
@@ -120,7 +124,7 @@ function Login() {
                                             className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                                             style={{
                                                 backgroundImage:
-                                                    `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`
+                                                    `url("../assets/img/curved-images/curved${image}.jpg")`
                                             }}
                                         />
                                     </div>

@@ -8,6 +8,8 @@ import axios from 'axios';
 import { useAuthDispatch } from './../context/auth'
 import { useAuthState } from './../context/auth'
 
+const image = Math.floor(Math.random() * 23);
+
 function Reset() {
     const {email,reset_token} = useAuthState();
     const dispatch = useAuthDispatch();
@@ -31,7 +33,7 @@ function Reset() {
     const resetPassword = () => {
         toast.promise(
             axios
-                .put('https://internme-backend.herokuapp.com/api/users/reset', data)
+                .put('http://localhost:9000/api/users/reset', data)
                 .then(res => {
                     dispatch({ type:'Remove_Token', payload: null });
                     dispatch({ type:'Remove_Email', payload: null });
@@ -100,7 +102,7 @@ function Reset() {
                                         <div
                                             className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                                             style={{
-                                                backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`
+                                                backgroundImage: `url("../assets/img/curved-images/curved${image}.jpg")`
                                             }}
                                         />
                                     </div>

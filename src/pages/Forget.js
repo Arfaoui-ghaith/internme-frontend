@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useAuthDispatch } from './../context/auth'
 
+const image = Math.floor(Math.random() * 23);
 
 function ForgetPassword() {
 
@@ -31,7 +32,7 @@ function ForgetPassword() {
     const forgetPassword = () => {
         toast.promise(
             axios
-                .post('https://internme-backend.herokuapp.com/api/users/reset', data)
+                .post('http://localhost:9000/api/users/reset', data)
                 .then(res => {
                     dispatch({ type:'Save_Email', payload: data.email });
                 }),
@@ -91,7 +92,7 @@ function ForgetPassword() {
                                         <div
                                             className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                                             style={{
-                                                backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`
+                                                backgroundImage: `url("../assets/img/curved-images/curved${image}.jpg")`
                                             }}
                                         />
                                     </div>

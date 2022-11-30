@@ -8,6 +8,8 @@ import axios from 'axios';
 import { useAuthDispatch } from './../context/auth'
 import { useAuthState } from './../context/auth'
 
+const image = Math.floor(Math.random() * 23);
+
 function Verify() {
 
     const {email} = useAuthState();
@@ -32,7 +34,7 @@ function Verify() {
     const verify = () => {
         toast.promise(
             axios
-                .post('https://internme-backend.herokuapp.com/api/users/verify', data)
+                .post('http://localhost:9000/api/users/verify', data)
                 .then(res => {
                     dispatch({ type:'Save_Token', payload: res.data.token });
                     handleOnClick();
@@ -92,7 +94,7 @@ function Verify() {
                                         <div
                                             className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                                             style={{
-                                                backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`
+                                                backgroundImage: `url("../assets/img/curved-images/curved${image}.jpg")`
                                             }}
                                         />
                                     </div>

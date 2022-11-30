@@ -7,6 +7,8 @@ import SkillsUpdater from "./components/SkillsUpdater"
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 
+const image = Math.floor(Math.random() * 23);
+
 function Profile(){
     const [show, setShow] = useState(false);
     const [showImage, setShowImage] = useState(false);
@@ -28,7 +30,7 @@ function Profile(){
 
     useEffect(() => {
         axios
-            .get("https://internme-backend.herokuapp.com/api/users/me",{headers: {'Authorization': `${user}`}})
+            .get("http://localhost:9000/api/users/me",{headers: {'Authorization': `${user}`}})
             .then(res => setData(res.data.user))
             .catch(err => console.error(err.message));
     },[])
@@ -46,7 +48,7 @@ function Profile(){
                     <div
                         className="page-header min-height-300 border-radius-xl mt-4"
                         style={{
-                            backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`,
+                            backgroundImage: `url("../assets/img/curved-images/curved${image}.jpg")`,
                             backgroundPositionY: "50%"
                         }}
                     >

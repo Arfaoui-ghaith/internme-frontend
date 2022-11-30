@@ -7,6 +7,8 @@ import {
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 
+const image = Math.floor(Math.random() * 23);
+
 function Register() {
 
     const navigate = useNavigate();
@@ -27,7 +29,7 @@ function Register() {
     const addUser = () => {
         toast.promise(
             axios
-                .post('https://internme-backend.herokuapp.com/api/users/signin', data)
+                .post('http://localhost:9000/api/users/signin', data)
                 .then(),
             {
                 loading: 'Loading...',
@@ -44,7 +46,7 @@ function Register() {
                     <div
                         className="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
                         style={{
-                            backgroundImage: `url("../assets/img/curved-images/curved${Math.floor(Math.random() * 23)}.jpg")`
+                            backgroundImage: `url("../assets/img/curved-images/curved${image}.jpg")`
                         }}
                     >
                         <span className="mask bg-gradient-dark opacity-6" />

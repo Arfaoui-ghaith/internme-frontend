@@ -33,7 +33,7 @@ function ImageUpdater({showImage,handleCloseImage,setData,data}) {
         toast.promise(
             axios({
                     method: 'post',
-                    url:'https://internme-backend.herokuapp.com/api/users/me',
+                    url:'http://localhost:9000/api/users/me',
                     data: file,
                     headers:{
                         'Authorization': `${user}`
@@ -70,7 +70,7 @@ function ImageUpdater({showImage,handleCloseImage,setData,data}) {
                                     setFile(formData)
 
                                     const request = new XMLHttpRequest();
-                                    request.open('POST', 'https://internme-backend.herokuapp.com/api/users/fakeImage', );
+                                    request.open('POST', 'http://localhost:9000/api/users/fakeImage', );
 
 
                                     // Should call the progress method to update the progress to 100% before calling load

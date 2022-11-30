@@ -16,7 +16,6 @@ function SkillsUpdater({showSkills,handleCloseSkills, data, setData}){
     const {user} = useAuthState();
 
     const convertUserSkills = () => {
-        console.log(data)
         if(data.skills !== undefined) {
             return data.skills.map(item => { return { label: item.skill.title, value: item.skill.id } })
         }
@@ -27,14 +26,13 @@ function SkillsUpdater({showSkills,handleCloseSkills, data, setData}){
     const [selectedSkills, setSelectedSkills] = useState(convertUserSkills());
 
     const convert = (skills) => {
-        console.log(skills)
         return skills.map(item => { return { label: item.title, value: item.id } });
     }
 
     useEffect(() => {
         axios({
             method: 'get',
-            url:'https://internme-backend.herokuapp.com/api/skills/',
+            url:'http://localhost:9000/api/skills/',
             headers:{
                 'Authorization': `${user}`
             }
@@ -45,7 +43,7 @@ function SkillsUpdater({showSkills,handleCloseSkills, data, setData}){
         toast.promise(
             axios({
                 method: 'put',
-                url:'https://internme-backend.herokuapp.com/api/users/me',
+                url:'http://localhost:9000/api/users/me',
                 data: {...data, skills: selectedSkills.map(item => item.value)},
                 headers:{
                     'Authorization': `${user}`
