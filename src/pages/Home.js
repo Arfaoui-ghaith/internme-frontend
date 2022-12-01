@@ -77,7 +77,7 @@ function Home() {
                     <div className="col-12 mt-4">
                         <div className="card mb-4">
                             <div className="card-header pb-0 p-3">
-                                <h6 className="mb-1">Filter {interns.length} Internships from {companies.length} Companies and 5 Countries</h6>
+                                <h6 className="mb-1">Filter {interns.length} Internships from {companies.length} Companies and 6 Countries</h6>
                                 <div className="d-flex justify-content-around">
                                     <div className="form-check form-switch mt-2">
                                         <input

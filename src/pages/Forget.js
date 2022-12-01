@@ -42,7 +42,6 @@ function ForgetPassword() {
                 error: (err) => err.response.data.message,
             }
         );
-        setTimeout(handleOnClick,3000);
     }
 
     return (
