@@ -42,6 +42,8 @@ function ForgetPassword() {
                 error: (err) => err.response.data.message,
             }
         );
+
+        handleOnClick();
     }
 
     return (

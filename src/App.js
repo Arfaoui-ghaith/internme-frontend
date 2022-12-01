@@ -22,7 +22,10 @@ function App() {
                                   <Route exact path='/register' element={<Register/>}/>
                                   <Route exact path='/login' element={<Login/>}/>
                                   <Route exact path='/forget' element={<Forget/>}/>
-                                  <Route exact path='/profile' element={<Profile/>}/>
+
+                                  <Route exact path='/profile' element={<DynamicRoutes authenticated/>}>
+                                      <Route exact path='/profile' element={<Profile/>}/>
+                                  </Route>
                                   <Route exact path='/intern' element={<DynamicRoutes authenticated/>}>
                                       <Route exact path='/intern' element={<Intern/>}/>
                                   </Route>
