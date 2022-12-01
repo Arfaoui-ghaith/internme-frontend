@@ -15,7 +15,7 @@ function Intern(){
     const extractPDF = () => {
             axios({
                 method: 'post',
-                url:'http://localhost:9000/api/interns/extract',
+                url:'https://internme.onrender.com/api/interns/extract',
                 data: {
                     title: intern.title,
                     company: {

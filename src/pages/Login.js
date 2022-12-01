@@ -30,7 +30,7 @@ function Login() {
     const loginUser = () => {
         toast.promise(
             axios
-                .post('http://localhost:9000/api/users/login', data)
+                .post('https://internme.onrender.com/api/users/login', data)
                 .then(res => {
                     dispatch({ type:'LOGIN', payload: res.data.token });
                 }),

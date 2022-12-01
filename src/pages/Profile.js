@@ -30,7 +30,7 @@ function Profile(){
 
     useEffect(() => {
         axios
-            .get("http://localhost:9000/api/users/me",{headers: {'Authorization': `${user}`}})
+            .get("https://internme.onrender.com/api/users/me",{headers: {'Authorization': `${user}`}})
             .then(res => setData(res.data.user))
             .catch(err => console.error(err.message));
     },[])

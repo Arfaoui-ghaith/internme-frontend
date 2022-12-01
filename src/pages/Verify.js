@@ -34,7 +34,7 @@ function Verify() {
     const verify = () => {
         toast.promise(
             axios
-                .post('http://localhost:9000/api/users/verify', data)
+                .post('https://internme.onrender.com/api/users/verify', data)
                 .then(res => {
                     dispatch({ type:'Save_Token', payload: res.data.token });
                     handleOnClick();
