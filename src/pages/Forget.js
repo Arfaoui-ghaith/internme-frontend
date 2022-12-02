@@ -35,6 +35,7 @@ function ForgetPassword() {
                 .post('https://internme.onrender.com/api/users/reset', data)
                 .then(res => {
                     dispatch({ type:'Save_Email', payload: data.email });
+                    window.location.replace('/verify');
                 }),
             {
                 loading: 'Loading...',
@@ -42,8 +43,6 @@ function ForgetPassword() {
                 error: (err) => err.response.data.message,
             }
         );
-
-        window.location.replace('/verify');
     }
 
     return (
