@@ -50,8 +50,9 @@ function Card({intern, data, userData}) {
     if(show()) {
         return (
             <React.Fragment>
-                <div className="col-md-4">
+                <div className="col-md-4 intern" style={{cursor: 'pointer'}} onClick={() => redirect()}>
                     <div className="card p-3 mb-2">
+
                         <div className="d-flex justify-content-between">
                             <div className="d-flex flex-row align-items-center">
                                 <div className="icon mb-2">
@@ -73,10 +74,15 @@ function Card({intern, data, userData}) {
                                     <p className="badge bg-success fw-bold text-light">Remote</p>
                                     : <p className="badge bg-danger fw-bold text-light">On site</p>
                                 }
+                                {new Date().getTime() > new Date(intern.validThrough).getTime() ?
+                                    <p className="badge bg-warning fw-bold text-light mx-2">Closed</p>
+                                    : ""
+                                }
                             </div>
+
                         </div>
                         <div className="mt-1">
-                            <h6 className="heading" style={{cursor: 'pointer'}} onClick={() => redirect()}>
+                            <h6 className="heading" >
                                 {intern.title}
                             </h6>
                             <div className="mt-5">
@@ -105,7 +111,7 @@ function Card({intern, data, userData}) {
                                     <span className="text1">
                                             <span
                                                 className="text2">Posted</span> {format(new Date(intern.datePosted).getTime())}
-                                        </span>{" "}
+                                        </span>
                                 </div>
                             </div>
                         </div>

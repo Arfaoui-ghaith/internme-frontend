@@ -9,7 +9,7 @@ function GuestHome() {
     const [interns,setInterns] = useState([]);
 
     useEffect(() => {
-        axios.get("https://internme.onrender.com/api/interns/")
+        axios.get("http://localhost:9000/api/interns/")
             .then(res => setInterns(res.data.interns))
             .catch(er => console.error(er));
     },[]);

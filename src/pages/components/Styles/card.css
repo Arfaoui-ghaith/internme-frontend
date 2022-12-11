@@ -3,6 +3,14 @@
   border-radius: 10px;
 }
 
+.intern:hover {
+
+  transform: scale(0.97);
+
+  transition-duration: 0.5s;
+
+}
+
 .c-details span {
   font-weight: 300;
   font-size: 15px

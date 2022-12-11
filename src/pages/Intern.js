@@ -5,17 +5,18 @@ import { format } from 'timeago.js';
 import axios from "axios";
 import { useAuthState } from './../context/auth'
 import {useNavigate} from "react-router-dom";
+import ScrollToTop from "react-scroll-to-top";
 
 const image = Math.floor(Math.random() * 23);
 function Intern(){
     const {user} = useAuthState();
     const { intern } = useInternState();
-    const duration = format(new Date(intern.validThrough).getTime(),"my-locale",{relativeDate: new Date(intern.datePosted).toLocaleDateString()});
+    const duration = format(new Date(intern.validThrough).getTime(),"my-locale",{relativeDate: new Date(/*intern.datePosted*/).toLocaleDateString()});
     const navigate = useNavigate();
     const extractPDF = () => {
             axios({
                 method: 'post',
-                url:'https://internme.onrender.com/api/interns/extract',
+                url:'http://localhost:9000/api/interns/extract',
                 data: {
                     title: intern.title,
                     company: {
@@ -37,6 +38,7 @@ function Intern(){
     return(
         <>
             <div className="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+                <ScrollToTop smooth color="#6f00ff" />
                 {/* Navbar */}
                 <AuthNav />
                 {/* End Navbar */}
@@ -113,6 +115,7 @@ function Intern(){
                             <div className="card h-10 mb-3">
                                 <div className="card-body p-3">
                                     <ul className="list-group">
+                                        {new Date().getTime() < new Date(intern.validThrough).getTime() ?
                                         <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                                             <div className="d-flex align-items-start flex-column justify-content-center">
                                                 <h4 className="mb-0 text-sm">{`You can apply ${duration}`}</h4>
@@ -130,7 +133,14 @@ function Intern(){
                                             >
                                                 Extract Application
                                             </span>
-                                        </li>
+                                        </li> :
+                                            <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                                <div className="d-flex align-items-start flex-column justify-content-center">
+                                                    <h4 className="mb-0 text-sm">{`Expired ${duration}`}</h4>
+                                                    <p className="mb-0 text-xs">Closed on, {new Date(intern.validThrough).toUTCString()}</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>

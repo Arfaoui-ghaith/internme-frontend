@@ -32,7 +32,7 @@ function ForgetPassword() {
     const forgetPassword = () => {
         toast.promise(
             axios
-                .post('https://internme.onrender.com/api/users/reset', data)
+                .post('http://localhost:9000/api/users/reset', data)
                 .then(res => {
                     dispatch({ type:'Save_Email', payload: data.email });
                     window.location.replace('/verify');

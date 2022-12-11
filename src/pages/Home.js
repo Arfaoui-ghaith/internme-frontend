@@ -6,6 +6,7 @@ import Select from 'react-select'
 import uab from 'unique-array-objects';
 import makeAnimated from 'react-select/animated';
 import { useAuthState } from './../context/auth'
+import ScrollToTop from "react-scroll-to-top";
 
 function Home() {
 
@@ -16,7 +17,7 @@ function Home() {
 
     useEffect(() => {
         axios
-            .get("https://internme.onrender.com/api/users/me",{headers: {'Authorization': `${user}`}})
+            .get("http://localhost:9000/api/users/me",{headers: {'Authorization': `${user}`}})
             .then(res => setUserData(res.data.user))
             .catch(err => console.error(err.message));
     },[user])
@@ -24,7 +25,7 @@ function Home() {
 
 
     useEffect(() => {
-        axios.get("https://internme.onrender.com/api/interns/")
+        axios.get("http://localhost:9000/api/interns/")
             .then(res => {
                 let skills1 = [];
                 for(let item of res.data.interns.filter(item => item.skills.length > 0)){
@@ -70,6 +71,7 @@ function Home() {
     return (
         <React.Fragment>
             <>
+                <ScrollToTop smooth color="#6f00ff" />
                 <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
                     {/* Navbar */}
                     <AuthNav />
