@@ -29,7 +29,7 @@ function Register() {
     const addUser = () => {
         toast.promise(
             axios
-                .post('http://localhost:9000/api/users/signin', data)
+                .post('https://internme-eccc19ef962f.herokuapp.com/api/users/signin', data)
                 .then(),
             {
                 loading: 'Loading...',

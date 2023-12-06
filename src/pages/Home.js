@@ -17,7 +17,7 @@ function Home() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:9000/api/users/me",{headers: {'Authorization': `${user}`}})
+            .get("https://internme-eccc19ef962f.herokuapp.com/api/users/me",{headers: {'Authorization': `${user}`}})
             .then(res => setUserData(res.data.user))
             .catch(err => console.error(err.message));
     },[user])
@@ -25,7 +25,7 @@ function Home() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:9000/api/interns/")
+        axios.get("https://internme-eccc19ef962f.herokuapp.com/api/interns/")
             .then(res => {
                 let skills1 = [];
                 for(let item of res.data.interns.filter(item => item.skills.length > 0)){

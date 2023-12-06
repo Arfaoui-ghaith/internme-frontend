@@ -27,7 +27,7 @@ function UserForm({show,handleClose, data, setData}){
         toast.promise(
             axios({
                 method: 'put',
-                url:'http://localhost:9000/api/users/me',
+                url:'https://internme-eccc19ef962f.herokuapp.com/api/users/me',
                 data: {...data, skills: data.skills.map(item => item.skill.id)},
                 headers:{
                     'Authorization': `${user}`

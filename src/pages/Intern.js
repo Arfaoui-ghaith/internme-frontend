@@ -16,7 +16,7 @@ function Intern(){
     const extractPDF = () => {
             axios({
                 method: 'post',
-                url:'http://localhost:9000/api/interns/extract',
+                url:'https://internme-eccc19ef962f.herokuapp.com/api/interns/extract',
                 data: {
                     title: intern.title,
                     company: {
