@@ -18,13 +18,14 @@ function AuthNav() {
         <nav
             className="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
             id="navbarBlur"
+            style={{ backgroundColor: "#f6f6f6" }}
             navbar-scroll="true"
         >
             <div className="container-fluid py-1 px-3">
                 <nav aria-label="">
                     <Link to={"/"}>
                         <img src="https://i.ibb.co/rcKvzsq/Screenshot-from-2023-12-06-02-15-52.png"
-                             className="img-fluid"
+                             className="img-fluid rounded-2"
                              style={{ height: "40px" }}
                              alt="..."/>
                     </Link>
